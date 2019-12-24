@@ -31,7 +31,6 @@ public class Leaf extends Node {
     private void allocateSpace(int size) throws OutOfSpaceException {
 
         FileSystem.fileStorage.Alloc(size, this);
-
     }
 
 }
