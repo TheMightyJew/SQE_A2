@@ -33,7 +33,7 @@ public class LeafTest {
     }
 
     @Before
-    public void initialSpace(){
+    public void initialLeaf(){
         try {
             fileSystem.file(new String[]{"root", testLeafName}, testLeafSize);
             leaf = FileSystem.fileStorage.getAlloc()[0];

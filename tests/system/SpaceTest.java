@@ -54,9 +54,10 @@ public class SpaceTest {
         }
     }
 
-    private void addLeaf() throws OutOfSpaceException, BadFileNameException {
+    private Leaf addLeaf() throws OutOfSpaceException, BadFileNameException {
         fileSystem.file(new String[]{"root", testLeafName},testLeafSize);
         expectedFreeSpace -= testLeafSize;
+        return fileSystem.FileExists(new String[]{"root", testLeafName});
     }
 
     @Test
@@ -81,4 +82,16 @@ public class SpaceTest {
         assertEquals(expectedFreeSpace, space.countFreeSpace());
     }
 
+    @Test
+    public void testGetAlloc(){
+        try {
+            Leaf leaf = addLeaf();
+            assertEquals(initialSpace, space.getAlloc().length);
+            assertEquals(leaf, space.getAlloc()[0]);
+        } catch (OutOfSpaceException e) {
+            e.printStackTrace();
+        } catch (BadFileNameException e) {
+            e.printStackTrace();
+        }
+    }
 }
