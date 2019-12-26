@@ -120,6 +120,18 @@ public class FileSystemTest {
             assertTrue(false);
         }
         try{
+            fileSystem.file(new String[]{"root", testTreeName, testLeafName},testLeafSize-1);
+            assertEquals(testLeafSize-1, initialSpace-space.countFreeSpace());
+            fileSystem.file(new String[]{"root", testTreeName, testLeafName},testLeafSize+1);
+            assertEquals(testLeafSize+1, initialSpace-space.countFreeSpace());
+            fileSystem.file(new String[]{"root", testTreeName, testLeafName},testLeafSize+3);
+            assertEquals(testLeafSize+3, initialSpace-space.countFreeSpace());
+            fileSystem.file(new String[]{"root", testTreeName, testLeafName},testLeafSize);
+        }
+        catch (Exception e){
+            assertTrue(false);
+        }
+        try{
             fileSystem.file(new String[]{"root", testTreeName, testLeafName},initialSpace+1);
             assertTrue(false);
         }
@@ -130,15 +142,7 @@ public class FileSystemTest {
         catch (Exception e){
             assertTrue(false);
         }
-        try{
-            fileSystem.file(new String[]{"root", testTreeName, testLeafName},testLeafSize-1);
-            assertEquals(testLeafSize-1, fileSystem.FileExists(new String[]{"root", testTreeName, testLeafName}).size);
-            fileSystem.file(new String[]{"root", testTreeName, testLeafName},testLeafSize+1);
-            assertEquals(testLeafSize-1, fileSystem.FileExists(new String[]{"root", testTreeName, testLeafName}).size);
-        }
-        catch (Exception e){
-            assertTrue(false);
-        }
+
     }
 
     @Test
